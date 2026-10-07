@@ -102,3 +102,16 @@
   - เพิ่ม audit middleware เพื่อบันทึกการเข้าถึงการจองตาม DOM-PDPA-01
   - ป้องกันความล้มเหลวใน SQLite ในหน่วยความจำของ test ด้วย try/except
 - ผล test: `cd backend && pytest -v` -> 4 passed ใน 1.11s
+
+---
+
+## 2569-10-07 คำสั่ง: /verify specs/001-booking/
+
+- ขอบเขต: ตรวจ requirement ไปข้างหน้า/ย้อนกลับ อ่าน source ทั้งหมดใน backend/app และ frontend/src, test ทั้งหมด, spec/plan/tasks/test-cases/rtm, UI mockup และ AGENTS.md
+- ข้อจำกัด: แก้เฉพาะ specs/001-booking/rtm.md และเพิ่มบันทึกนี้; ไม่แก้ code, test, spec, plan หรือ tasks
+- ผล test:
+  - `cd backend && pytest -v` -> 4 passed, 0 failed (มี Starlette deprecation warning)
+  - `cd frontend && npm test` -> 3 passed, 0 failed (มี React act(...) warning ใน setup.test.jsx)
+- จำนวนแถวตามรอยไปข้างหน้า: ครบ 0, ยังไม่ถึง 6, รอ Q-xx 0, ช่องโหว่ 9
+- ข้อค้นพบใหม่: F-008 ถึง F-017
+- ข้อค้นพบที่ย้ายไป “แก้แล้ว”: F-001 (วันล่วงหน้าปรับเป็น 30); F-005 และ F-006 (เดิมนับงานที่ยังไม่เสร็จเป็นข้อค้นพบ ซึ่งไม่ตรงเกณฑ์ verify)
