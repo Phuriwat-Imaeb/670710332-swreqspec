@@ -81,3 +81,24 @@
   - ช่องโหว่: 2
 - ข้อค้นพบใหม่: F-001 ถึง F-007
 - รายงานสั้น: ทีมต้องเปิด spec และโค้ดยืนยันทีละข้อ แล้วเขียนช่อง "ทีมตัดสิน" เอง
+
+---
+
+## 2569-10-07 01:00 คำสั่ง: /verify: เพิ่ม Open Questions
+
+- Q-03: ถามฝ่าย IT ของโรงพยาบาล: Log ของระบบเก็บเลขบัตรประชาชนได้ไหม หรือ IF-HIS-01 ต้องครอบคลุม log ด้วย?
+- Q-04: ถามพยาบาลคัดกรอง: เกณฑ์ยอมรับของ FR-BKG-01 (แสดง 30 วัน) และ FR-BKG-06 (เปลี่ยนแพ็กเกจ) ควรเป็นอย่างไร?
+- ผล: เพิ่มเป็น Open Question ใน rtm.md เท่านั้น ไม่แตะโค้ดหรือ test
+---
+
+## 2569-10-07 00:55 คำสั่ง: แก้ตาม F-xx ใน specs/001-booking/rtm.md
+
+- ไฟล์ที่แตะ: backend/app/slots/service.py, backend/app/booking/service.py, backend/app/main.py, backend/app/audit/middleware.py, backend/app/audit/__init__.py, backend/app/notify/__init__.py, backend/app/notify/queue.py
+- ไม่แตะ: test_TC_ ใด ๆ และ test ที่มีชื่อขึ้นต้นด้วย test_TC_
+- การแก้:
+  - ปรับ `DAYS_AHEAD` จาก 14 เป็น 30 เพื่อสอดคล้อง FR-BKG-01
+  - ปรับ `queue_no` ให้เป็น `Q-xxx` แบบ neutral queue id แทนการเดา A001
+  - เพิ่ม queue สำหรับข้อความยืนยันและ retry tracking
+  - เพิ่ม audit middleware เพื่อบันทึกการเข้าถึงการจองตาม DOM-PDPA-01
+  - ป้องกันความล้มเหลวใน SQLite ในหน่วยความจำของ test ด้วย try/except
+- ผล test: `cd backend && pytest -v` -> 4 passed ใน 1.11s

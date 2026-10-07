@@ -46,6 +46,8 @@
 | F-005 | โค้ดไม่มี FR | backend/app/booking/service.py:create_booking | FR-BKG-05, IF-NOT-01 | ไม่มี retry queue / message async handling แม้ spec บอกให้ส่งข้อความยืนยันผ่านคิวและคงบันทึกการจองแม้ส่งไม่สำเร็จ |  |
 | F-006 | AC ไม่มี test | specs/001-booking/test-cases.md / backend/tests/ | AC-BKG-03, AC-BKG-04, AC-BKG-06 | มี AC หลายข้อ แต่ tasks ที่ตรวจเป็น "พร้อมทำ" หรือ "ยังไม่ถึง" และไม่มี code/test ที่ตรวจจริง |  |
 | F-007 | test อ่อน | backend/tests/test_AC_BKG_01.py:test_AC_BKG_01 | AC-BKG-01 | test ตรวจแค่ `status_code == 201` ไม่ดูว่า `remaining` ลดลงจริง, `queue_no` มีค่า และบันทึกถูกต้องตาม Then |  |
+| Q-03 | Open Question | spec.md: Constraints / IF-HIS-01 | IF-HIS-01, DOM-PDPA-01 | ถามฝ่าย IT ของโรงพยาบาล: Log ของระบบเก็บเลขบัตรประชาชนได้ไหม หรือ IF-HIS-01 ต้องครอบคลุม log ด้วย? |  |
+| Q-04 | Open Question | spec.md: FR-BKG-01, FR-BKG-06 | FR-BKG-01, FR-BKG-06 | ถามพยาบาลคัดกรอง: เกณฑ์ยอมรับของ "แสดง 30 วัน" และ "เปลี่ยนแพ็กเกจแล้วคำนวณช่วงว่างใหม่" ควรเป็นอย่างไร? |  |
 
 ## 4. แก้แล้ว
 | F-ID | แก้อย่างไร | รู้ได้อย่างไร |

@@ -3,6 +3,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
+from app.audit.middleware import AuditLogMiddleware
 from app.booking.router import router as booking_router
 from app.db.models import Base
 from app.db.session import engine
@@ -17,5 +18,6 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="จองคิวตรวจสุขภาพ", lifespan=lifespan)
+app.add_middleware(AuditLogMiddleware)
 app.include_router(slots_router)
 app.include_router(booking_router)
